@@ -21,3 +21,11 @@ management:
     health:
       probes:
         enabled: true
+        
+        
+logging:
+  file:
+    name: /survey-company-microservice/target/logs/mi-logger.log
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss}  - %msg%n"
+
