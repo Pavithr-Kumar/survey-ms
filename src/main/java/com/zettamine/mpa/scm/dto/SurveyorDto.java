@@ -1,6 +1,5 @@
 package com.zettamine.mpa.scm.dto;
 
-import com.zettamine.mpa.scm.entity.SurveyCompany;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;

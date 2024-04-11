@@ -117,6 +117,7 @@ public class SurveyCompanyServiceImpl implements ISurveyCompanyService {
 				
 	}
 
+	
 	@Override
 	public List<SurveyCompanyDto> getCompaniesByCriteria(SurveyCompanySearchCriteriaDto searchCriteriaDto) {
 		SurveyCompany surveyCompany= SurveyCompanyMapper.mapSearchCriteriaToSurveyCompany(searchCriteriaDto, new SurveyCompany());
@@ -124,8 +125,6 @@ public class SurveyCompanyServiceImpl implements ISurveyCompanyService {
 		return list.stream()
 				            .map(company->SurveyCompanyMapper.mapToSurveyCompanyDto(company, new SurveyCompanyDto()))
 				            .collect(Collectors.toList());
-		
-		
 		
 	}
 
