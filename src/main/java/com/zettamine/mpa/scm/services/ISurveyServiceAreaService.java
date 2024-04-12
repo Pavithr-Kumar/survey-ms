@@ -16,7 +16,7 @@ public interface ISurveyServiceAreaService {
      * @param serviceAreaDto The DTO containing survey service area details to be saved.
      * @return True if the survey service area is successfully saved, otherwise false.
      */
-    boolean saveSurveyServiceArea(ServiceAreasDto serviceAreasDto);
+    void saveSurveyServiceArea(ServiceAreasDto serviceAreasDto);
 
     /**
      * Fetches a survey service area by ID.

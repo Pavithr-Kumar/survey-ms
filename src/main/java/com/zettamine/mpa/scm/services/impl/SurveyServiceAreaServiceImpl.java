@@ -38,7 +38,7 @@ public class SurveyServiceAreaServiceImpl implements ISurveyServiceAreaService {
      * @throws ResourceNotFoundException if the survey company with the provided ID is not found.
      */
     @Override
-    public boolean saveSurveyServiceArea(ServiceAreasDto serviceAreasDto) {
+    public void saveSurveyServiceArea(ServiceAreasDto serviceAreasDto) {
     	SurveyCompany surveyCompany=  surveyCompanyRepository.findById(serviceAreasDto.getSurveyCompanyId())
                                 .orElseThrow(()->new ResourceNotFoundException("No Companies found with Id : " + serviceAreasDto.getSurveyCompanyId()));
        List<SurveyServiceArea> surveyAreas = serviceAreasDto.getSurveyServiceAreas().stream()
@@ -47,7 +47,7 @@ public class SurveyServiceAreaServiceImpl implements ISurveyServiceAreaService {
     		                                                	area.setSurveyCompany(surveyCompany);
     		                                                	List<SurveyServiceArea> list= serviceAreaRepository.findAll(Example.of(area));
     		                                                	if(list.size()>0) {
-    		                                                		throw new DuplicationException("Some service areas alraedy exists");
+    		                                                		throw new DuplicationException("Some service areas alraedy exists in city "+list.get(1).getCity());
     		                                                	}
     		                                                	return true;
     		                                                })
@@ -57,7 +57,7 @@ public class SurveyServiceAreaServiceImpl implements ISurveyServiceAreaService {
        surveyCompanyRepository.save(surveyCompany);
 
        
-        return true;
+        
     }
 
     /**

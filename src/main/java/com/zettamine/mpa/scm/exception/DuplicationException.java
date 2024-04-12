@@ -1,5 +1,7 @@
 package com.zettamine.mpa.scm.exception;
 
+import com.zettamine.mpa.scm.entity.SurveyServiceArea;
+
 public class DuplicationException extends RuntimeException {
 
 //<<<<<<< HEAD
@@ -30,6 +32,8 @@ public class DuplicationException extends RuntimeException {
 		super(cause);
 		// TODO Auto-generated constructor stub
 	}
+	
+	
 
 	
 

@@ -39,7 +39,7 @@ public class SurveyorServiceImpl implements ISurveyorService {
      * @throws DuplicationException if a surveyor with the same license ID, email, or phone already exists.
      */
     @Override
-    public boolean saveSurveyor(SurveyorDto surveyorDto) {
+    public void saveSurveyor(SurveyorDto surveyorDto) {
         Optional<SurveyCompany> optSurveyCompany = surveyCompanyRepository.findById(surveyorDto.getSurveyCompanyId());
 
         if (optSurveyCompany.isEmpty()) {
@@ -55,7 +55,7 @@ public class SurveyorServiceImpl implements ISurveyorService {
         surveyor.setSurveyCompany(optSurveyCompany.get());
         surveyorRepository.save(surveyor);
 
-        return true;
+      
     }
 
     /**

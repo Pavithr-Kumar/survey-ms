@@ -65,6 +65,7 @@ public class SurveyorController {
     }
     
     
+    
     @GetMapping("/fetch/company/{id}")
     public ResponseEntity<List<SurveyorDto>> getAllServiceAreas(@PathVariable Integer id){
     	return ResponseEntity.status(HttpStatus.OK)

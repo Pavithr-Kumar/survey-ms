@@ -15,7 +15,7 @@ public interface ISurveyorService {
      * @param surveyorDto The DTO containing surveyor details to be saved.
      * @return True if the surveyor is successfully saved, otherwise false.
      */
-    boolean saveSurveyor(SurveyorDto surveyorDto);
+    void saveSurveyor(SurveyorDto surveyorDto);
 
     /**
      * Fetches a surveyor by ID.

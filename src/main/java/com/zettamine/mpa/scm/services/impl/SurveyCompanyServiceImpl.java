@@ -1,8 +1,10 @@
 package com.zettamine.mpa.scm.services.impl;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Example;
@@ -12,11 +14,13 @@ import org.springframework.stereotype.Service;
 import com.zettamine.mpa.scm.dto.SurveyCompanyDto;
 import com.zettamine.mpa.scm.dto.SurveyCompanySearchCriteriaDto;
 import com.zettamine.mpa.scm.entity.SurveyCompany;
+import com.zettamine.mpa.scm.entity.SurveyServiceArea;
 import com.zettamine.mpa.scm.entity.SurveyType;
 import com.zettamine.mpa.scm.exception.DuplicationException;
 import com.zettamine.mpa.scm.exception.ResourceNotFoundException;
 import com.zettamine.mpa.scm.mapper.SurveyCompanyMapper;
 import com.zettamine.mpa.scm.repository.SurveyCompanyRepository;
+import com.zettamine.mpa.scm.repository.SurveyServiceAreaRepository;
 import com.zettamine.mpa.scm.repository.SurveyServiceTypeRepository;
 import com.zettamine.mpa.scm.services.ISurveyCompanyService;
 import com.zettamine.mpa.scm.util.SurveyUtility;
@@ -28,6 +32,7 @@ import lombok.AllArgsConstructor;
 public class SurveyCompanyServiceImpl implements ISurveyCompanyService {
 	private SurveyCompanyRepository surveyCompanyRepo;
 	private SurveyServiceTypeRepository surveyTypeRepository;
+	private SurveyServiceAreaRepository serviceAreaRepository;
 
 	@Override
 	public void createSurveyCompany(SurveyCompanyDto surveyCompanyDto) {
@@ -119,30 +124,65 @@ public class SurveyCompanyServiceImpl implements ISurveyCompanyService {
 	}
 
 	
-//	@Override
-//	public List<SurveyCompanyDto> getCompaniesByCriteria(SurveyCompanySearchCriteriaDto searchCriteriaDto) {
-//		SurveyCompany surveyCompany= SurveyCompanyMapper.mapSearchCriteriaToSurveyCompany(searchCriteriaDto, new SurveyCompany());
-//		List<SurveyCompany> list = surveyCompanyRepo.findAll(Example.of(surveyCompany));
-//		return list.stream()
-//				            .map(company->SurveyCompanyMapper.mapToSurveyCompanyDto(company, new SurveyCompanyDto()))
-//				            .collect(Collectors.toList());
-//		
-//	}
-	
 	@Override
 	public List<SurveyCompanyDto> getCompaniesByCriteria(SurveyCompanySearchCriteriaDto searchCriteriaDto) {
+		SurveyCompany surveyCompany= SurveyCompanyMapper.mapSearchCriteriaToSurveyCompany(searchCriteriaDto, new SurveyCompany());
+		List<SurveyCompany> list = surveyCompanyRepo.findAll(Example.of(surveyCompany));
+		return list.stream()
+				            .map(company->SurveyCompanyMapper.mapToSurveyCompanyDto(company, new SurveyCompanyDto()))
+				            .collect(Collectors.toList());
+		
+	}
+	
+	@Override
+	public List<SurveyCompanyDto> getCompaniesByServiceArea(SurveyCompanySearchCriteriaDto searchCriteriaDto) {
 		SurveyCompany surveyCompany= SurveyCompanyMapper.mapSearchCriteriaToSurveyCompany(searchCriteriaDto, new SurveyCompany());
 		ExampleMatcher matcher = ExampleMatcher.matching()
                 .withMatcher("companyName", match -> match.contains().ignoreCase()) // Configuring matcher only for 'name' property
                 .withIgnoreNullValues();
-
+        surveyCompany.setCity(null);
+        surveyCompany.setState(null);
+        surveyCompany.setZipcode(null);
+        
         Example<SurveyCompany> example = Example.of(surveyCompany, matcher);
-
         List<SurveyCompany> list = surveyCompanyRepo.findAll(example);
-		return list.stream()
+        Set<SurveyCompany> result = new HashSet<>();
+        
+        SurveyServiceArea area = new SurveyServiceArea();
+        area.setCity(searchCriteriaDto.getCity());
+        area.setState(searchCriteriaDto.getState());
+        area.setZipcode(searchCriteriaDto.getZipcode());
+        List<SurveyServiceArea> areas = serviceAreaRepository.findAll(Example.of(area));
+        
+        if(searchCriteriaDto.getName()==null && searchCriteriaDto.getState() ==null && searchCriteriaDto.getCity()==null && searchCriteriaDto.getZipcode()==null) {
+        	surveyCompanyRepo.findAll().forEach(com->result.add(com));
+        }
+        
+        if(searchCriteriaDto.getName()!=null && searchCriteriaDto.getState() ==null && searchCriteriaDto.getCity()==null && searchCriteriaDto.getZipcode()==null) {
+        	list.forEach(com->result.add(com));
+        }
+        
+        
+        if(list.size()>0 )
+        list.forEach(company->{
+        	areas.forEach(a->{
+        		if(a.getSurveyCompany().getSurveyCompanyId().equals(company.getSurveyCompanyId())){
+        			result.add(company);
+        		}
+        	});
+        });
+        else
+        {
+        	areas.forEach(a->{
+        		
+        			result.add(a.getSurveyCompany());
+        		});
+        }
+		return result.stream()
 				.map(company->SurveyCompanyMapper.mapToSurveyCompanyDto(company, new SurveyCompanyDto()))
 				.collect(Collectors.toList());
 		
 	}
+
 
 }

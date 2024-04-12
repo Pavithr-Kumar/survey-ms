@@ -15,6 +15,7 @@ public interface ISurveyCompanyService {
 	 void updateSurveyCompany(Integer surveyCompanyId, SurveyCompanyDto surveyCompanyDto);
 	 
 	 List<SurveyCompanyDto> getCompaniesByCriteria(SurveyCompanySearchCriteriaDto searchCriteriaDto);
+	 List<SurveyCompanyDto> getCompaniesByServiceArea(SurveyCompanySearchCriteriaDto searchCriteriaDto);
 	
 	
 
