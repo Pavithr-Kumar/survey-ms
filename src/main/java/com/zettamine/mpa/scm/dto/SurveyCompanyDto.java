@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.zettamine.mpa.scm.constants.SurveyConstants;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
@@ -16,7 +17,7 @@ import lombok.ToString;
 public class SurveyCompanyDto {
 	private Integer surveyCompanyId;
 	
-	@NotNull
+	@NotNull(message = SurveyConstants.PROVIDE_VALUE)
 	private String companyName;
 	
 	private String address;

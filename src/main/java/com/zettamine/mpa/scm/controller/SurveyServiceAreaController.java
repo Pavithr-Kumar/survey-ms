@@ -50,7 +50,7 @@ public class SurveyServiceAreaController {
      */
     @PutMapping("/update/{id}")
     public ResponseEntity<ResponseDto> handleUpdateServiceAreaRequest(@RequestBody SurveyServiceAreaDto serviceAreaDto, @PathVariable Integer id) {
-        serviceAreaService.updateSurveyor(serviceAreaDto, id);
+        serviceAreaService.updateSurveyServiceArea(serviceAreaDto, id);
         return ResponseEntity.status(HttpStatus.OK)
                              .body(new ResponseDto("200", "Service Area Updated Successfully"));
     }
@@ -64,7 +64,7 @@ public class SurveyServiceAreaController {
     @GetMapping("/fetch/{id}")
     public ResponseEntity<SurveyServiceAreaDto> handleFetchServiceAreaRequest(@PathVariable Integer id) {
         return ResponseEntity.status(HttpStatus.OK)
-                             .body(serviceAreaService.fetchSurveyor(id));
+                             .body(serviceAreaService.fetchSurveyServiceArea(id));
     }
     
     @GetMapping("/fetch/company/{id}")

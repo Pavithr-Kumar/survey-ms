@@ -26,7 +26,7 @@ import lombok.AllArgsConstructor;
  */
 @Service
 @AllArgsConstructor
-public class SurveyorService implements ISurveyorService {
+public class SurveyorServiceImpl implements ISurveyorService {
     private final SurveyorRepository surveyorRepository;
     private final SurveyCompanyRepository surveyCompanyRepository;
 

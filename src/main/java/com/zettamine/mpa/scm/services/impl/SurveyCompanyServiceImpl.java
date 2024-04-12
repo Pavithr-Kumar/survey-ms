@@ -6,6 +6,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
 import com.zettamine.mpa.scm.dto.SurveyCompanyDto;
@@ -118,13 +119,29 @@ public class SurveyCompanyServiceImpl implements ISurveyCompanyService {
 	}
 
 	
+//	@Override
+//	public List<SurveyCompanyDto> getCompaniesByCriteria(SurveyCompanySearchCriteriaDto searchCriteriaDto) {
+//		SurveyCompany surveyCompany= SurveyCompanyMapper.mapSearchCriteriaToSurveyCompany(searchCriteriaDto, new SurveyCompany());
+//		List<SurveyCompany> list = surveyCompanyRepo.findAll(Example.of(surveyCompany));
+//		return list.stream()
+//				            .map(company->SurveyCompanyMapper.mapToSurveyCompanyDto(company, new SurveyCompanyDto()))
+//				            .collect(Collectors.toList());
+//		
+//	}
+	
 	@Override
 	public List<SurveyCompanyDto> getCompaniesByCriteria(SurveyCompanySearchCriteriaDto searchCriteriaDto) {
 		SurveyCompany surveyCompany= SurveyCompanyMapper.mapSearchCriteriaToSurveyCompany(searchCriteriaDto, new SurveyCompany());
-		List<SurveyCompany> list = surveyCompanyRepo.findAll(Example.of(surveyCompany));
+		ExampleMatcher matcher = ExampleMatcher.matching()
+                .withMatcher("companyName", match -> match.contains().ignoreCase()) // Configuring matcher only for 'name' property
+                .withIgnoreNullValues();
+
+        Example<SurveyCompany> example = Example.of(surveyCompany, matcher);
+
+        List<SurveyCompany> list = surveyCompanyRepo.findAll(example);
 		return list.stream()
-				            .map(company->SurveyCompanyMapper.mapToSurveyCompanyDto(company, new SurveyCompanyDto()))
-				            .collect(Collectors.toList());
+				.map(company->SurveyCompanyMapper.mapToSurveyCompanyDto(company, new SurveyCompanyDto()))
+				.collect(Collectors.toList());
 		
 	}
 

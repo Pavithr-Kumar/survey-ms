@@ -25,7 +25,7 @@ import lombok.AllArgsConstructor;
  */
 @Service
 @AllArgsConstructor
-public class SurveyServiceAreaService implements ISurveyServiceAreaService {
+public class SurveyServiceAreaServiceImpl implements ISurveyServiceAreaService {
 
     private final SurveyServiceAreaRepository serviceAreaRepository;
     private final SurveyCompanyRepository surveyCompanyRepository;
@@ -68,7 +68,7 @@ public class SurveyServiceAreaService implements ISurveyServiceAreaService {
      * @throws ResourceNotFoundException if no survey service area is found with the provided ID.
      */
     @Override
-    public SurveyServiceAreaDto fetchSurveyor(Integer id) {
+    public SurveyServiceAreaDto fetchSurveyServiceArea(Integer id) {
         return SurveyServiceAreaMapper.mapToSurveyServiceAreaDto(serviceAreaRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("No Service Areas found with id : " + id)),
                 new SurveyServiceAreaDto());
@@ -82,13 +82,21 @@ public class SurveyServiceAreaService implements ISurveyServiceAreaService {
      * @throws ResourceNotFoundException if no survey service area is found with the provided ID.
      */
     @Override
-    public void updateSurveyor(SurveyServiceAreaDto serviceAreaDto, Integer id) {
+    public void updateSurveyServiceArea(SurveyServiceAreaDto serviceAreaDto, Integer id) {
     	SurveyCompany surveyCompany=  surveyCompanyRepository.findById(serviceAreaDto.getSurveyCompanyId())
     			.orElseThrow(()->new ResourceNotFoundException("No Companies found with Id : " + serviceAreaDto.getSurveyCompanyId()));
         serviceAreaRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("No Service Areas Found with Id : " + id));
-        serviceAreaDto.setServiceAreaId(id);
+        
         SurveyServiceArea surveyServiceArea = SurveyServiceAreaMapper.mpaToSurveyServiceArea(new SurveyServiceArea(), serviceAreaDto);
+        surveyServiceArea.setServiceAreaId(null);
         surveyServiceArea.setSurveyCompany(surveyCompany);
+        
+       if( serviceAreaRepository.findAll(Example.of(surveyServiceArea)).size()>0) {
+    	   throw new DuplicationException("Service area alraedy exists");
+       }
+       
+        
+       surveyServiceArea.setServiceAreaId(id);
 
         serviceAreaRepository.save(surveyServiceArea);
        

@@ -22,5 +22,19 @@ public class SurveyConstants {
 	
 	public static final String STATUS_500 = "500";
 	public static final String MESSAGE_500 = "Please try again";
+	
+	
+	
+	public static final String PROVIDE_VALUE = "Provide value";
+	
+	public static final String VALID_NAME = "Provide valid name";
+
+	public static final String VALID_ZIPCODE = "Provide valid zipcode";
+
+	public static final String VALID_PHONE = "Provide valid phone number";
+
+	public static final String VALID_EMAIL = "Provide valid email";
+
+	public static final String NOT_NULL = "Should not be null";
  
 }

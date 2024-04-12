@@ -24,7 +24,7 @@ public interface ISurveyServiceAreaService {
      * @param id The ID of the survey service area to fetch.
      * @return SurveyServiceAreaDto containing the information of the fetched survey service area.
      */
-    SurveyServiceAreaDto fetchSurveyor(Integer id);
+    SurveyServiceAreaDto fetchSurveyServiceArea(Integer id);
 
     /**
      * Updates an existing survey service area.
@@ -32,7 +32,7 @@ public interface ISurveyServiceAreaService {
      * @param serviceAreaDto The DTO containing updated survey service area information.
      * @param id The ID of the survey service area to be updated.
      */
-    void updateSurveyor(SurveyServiceAreaDto serviceAreaDto, Integer id);
+    void updateSurveyServiceArea(SurveyServiceAreaDto serviceAreaDto, Integer id);
     
     
     List<SurveyServiceAreaDto> getAllByCompanyId(Integer surveyCompanyId);
