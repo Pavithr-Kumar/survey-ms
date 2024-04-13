@@ -36,4 +36,7 @@ public interface ISurveyServiceAreaService {
     
     
     List<SurveyServiceAreaDto> getAllByCompanyId(Integer surveyCompanyId);
+    
+    List<SurveyServiceAreaDto> getAllServiceAreas();
+    
 }

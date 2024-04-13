@@ -63,6 +63,12 @@ public class SurveyCompanyController {
 		
 	}
 	
+	@GetMapping("/fetch-all")
+	public ResponseEntity<List<SurveyCompanyDto>> getAllCompanies(){
+		return ResponseEntity.status(HttpStatus.OK)
+				.body(surveyCompanyService.getAllCompanies());
+	}
+	
 	
 	
 

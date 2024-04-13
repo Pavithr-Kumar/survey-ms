@@ -1,5 +1,7 @@
 package com.zettamine.mpa.scm.controller;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,5 +44,19 @@ public class SurveyTypeController {
 		
 		return ResponseEntity.status(HttpStatus.OK).body(new ResponseDto(SurveyConstants.STATUS_200, "Survey Type updated successfully"));
 	}
+	
+	@GetMapping("/fetch-by-company")
+	public ResponseEntity<List<SurveyTypeDto>> getAllSurveyTypesByCompany(Integer companyId){
+		return ResponseEntity.status(HttpStatus.OK)
+				             .body(surveyTypeService.getAllSurveyTypesByCompany(companyId));
+	}
+	
+	@GetMapping("/fetch-all")
+	public ResponseEntity<List<SurveyTypeDto>> getAllSurveyTypes(Integer companyId){
+		return ResponseEntity.status(HttpStatus.OK)
+				.body(surveyTypeService.getAllSurveyTypes());
+	}
+	
+	
 
 }

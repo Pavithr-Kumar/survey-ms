@@ -120,5 +120,13 @@ public class SurveyorServiceImpl implements ISurveyorService {
 				                              .collect(Collectors.toList());
 		
 	}
+
+	@Override
+	public List<SurveyorDto> getAllSurveyors() {
+		
+		return surveyorRepository.findAll().stream()
+				                           .map(surveyor->SurveyorMapper.mapToSurveyorDto(surveyor, new SurveyorDto()))
+				                           .collect(Collectors.toList());
+	}
 }
 

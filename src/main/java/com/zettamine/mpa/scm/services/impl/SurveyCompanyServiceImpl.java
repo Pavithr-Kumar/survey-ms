@@ -184,5 +184,12 @@ public class SurveyCompanyServiceImpl implements ISurveyCompanyService {
 		
 	}
 
+	@Override
+	public List<SurveyCompanyDto> getAllCompanies() {
+		return surveyCompanyRepo.findAll().stream()
+				                          .map(company->SurveyCompanyMapper.mapToSurveyCompanyDto(company, new SurveyCompanyDto()))
+				                          .collect(Collectors.toList());
+	}
+
 
 }

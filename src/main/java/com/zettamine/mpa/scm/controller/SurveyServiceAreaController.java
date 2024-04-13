@@ -68,8 +68,14 @@ public class SurveyServiceAreaController {
     }
     
     @GetMapping("/fetch/company/{id}")
-    public ResponseEntity<List<SurveyServiceAreaDto>> getAllServiceAreas(@PathVariable Integer id){
+    public ResponseEntity<List<SurveyServiceAreaDto>> getAllServiceAreasByCompany(@PathVariable Integer id){
     	return ResponseEntity.status(HttpStatus.OK)
                 .body(serviceAreaService.getAllByCompanyId(id));
+    }
+    
+    @GetMapping("/fetch-all")
+    public ResponseEntity<List<SurveyServiceAreaDto>> getAllServiceAreas(){
+    	return ResponseEntity.status(HttpStatus.OK)
+    			.body(serviceAreaService.getAllServiceAreas());
     }
 }

@@ -1,14 +1,18 @@
 package com.zettamine.mpa.scm.services.impl;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
 import com.zettamine.mpa.scm.dto.SurveyTypeDto;
+import com.zettamine.mpa.scm.entity.SurveyCompany;
 import com.zettamine.mpa.scm.entity.SurveyType;
 import com.zettamine.mpa.scm.exception.DuplicationException;
 import com.zettamine.mpa.scm.exception.ResourceNotFoundException;
 import com.zettamine.mpa.scm.mapper.SurveyTypeMapper;
+import com.zettamine.mpa.scm.repository.SurveyCompanyRepository;
 import com.zettamine.mpa.scm.repository.SurveyServiceTypeRepository;
 import com.zettamine.mpa.scm.services.ISurveyTypeService;
 import com.zettamine.mpa.scm.util.SurveyUtility;
@@ -19,6 +23,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class SurveyTypeServiceImpl implements ISurveyTypeService {
 	private SurveyServiceTypeRepository surveyTypeRepository;
+	private SurveyCompanyRepository surveyCompanyRepository;
 
 	@Override
 	public void createSurveyType(SurveyTypeDto surveyTypeDto) {
@@ -65,6 +70,25 @@ public class SurveyTypeServiceImpl implements ISurveyTypeService {
 		surveyType.setSurveyTypeId(id);
 		surveyTypeRepository.save(surveyType);
 		
+	}
+
+	@Override
+	public List<SurveyTypeDto> getAllSurveyTypesByCompany(Integer companyId) {
+		SurveyCompany surveyCompany=surveyCompanyRepository.findById(companyId)
+				                                                      .orElseThrow(()->new ResourceNotFoundException("No Company Exists with Id : "+companyId));
+		
+		
+		return surveyCompany.getSurveyTypes().stream()
+				                             .map(type->SurveyTypeMapper.mapToSurveyTypeDto(type, new SurveyTypeDto()))
+				                             .collect(Collectors.toList());
+	}
+
+	@Override
+	public List<SurveyTypeDto> getAllSurveyTypes() {
+		
+		return surveyTypeRepository.findAll().stream()
+				.map(type->SurveyTypeMapper.mapToSurveyTypeDto(type, new SurveyTypeDto()))
+                .collect(Collectors.toList());
 	}
 	
 	

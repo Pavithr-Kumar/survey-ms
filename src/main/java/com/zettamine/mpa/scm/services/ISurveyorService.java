@@ -33,4 +33,6 @@ public interface ISurveyorService {
      */
     void updateSurveyor(SurveyorDto surveyorDto, Integer id);
     List<SurveyorDto> getAllSurveyorsByCompanyId(Integer surveyCompanyId);
+    
+    List<SurveyorDto> getAllSurveyors();
 }

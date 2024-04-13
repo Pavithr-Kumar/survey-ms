@@ -111,4 +111,12 @@ public class SurveyServiceAreaServiceImpl implements ISurveyServiceAreaService {
 				                              .collect(Collectors.toList());
 		
 	}
+
+	@Override
+	public List<SurveyServiceAreaDto> getAllServiceAreas() {
+		
+		return serviceAreaRepository.findAll().stream()
+				                              .map(area->SurveyServiceAreaMapper.mapToSurveyServiceAreaDto(area, new SurveyServiceAreaDto()))
+				                              .toList();
+	}
 }

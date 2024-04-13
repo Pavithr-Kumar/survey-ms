@@ -16,6 +16,8 @@ public interface ISurveyCompanyService {
 	 
 	 List<SurveyCompanyDto> getCompaniesByCriteria(SurveyCompanySearchCriteriaDto searchCriteriaDto);
 	 List<SurveyCompanyDto> getCompaniesByServiceArea(SurveyCompanySearchCriteriaDto searchCriteriaDto);
+	 
+	 List<SurveyCompanyDto> getAllCompanies();
 	
 	
 
