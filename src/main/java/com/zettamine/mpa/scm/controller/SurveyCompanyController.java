@@ -59,7 +59,7 @@ public class SurveyCompanyController {
 	@GetMapping("/search-by-serv-area")
 	public ResponseEntity<List<SurveyCompanyDto>> getCompaniesByServiceArea(@RequestBody SurveyCompanySearchCriteriaDto searchCriteriaDto){
 		return ResponseEntity.status(HttpStatus.OK)
-				.body(surveyCompanyService.getCompaniesByServiceArea(searchCriteriaDto));
+				.body(surveyCompanyService.getAllCompaniesByServiceAreaCriteria(searchCriteriaDto));
 		
 	}
 	

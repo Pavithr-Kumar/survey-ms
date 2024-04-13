@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import com.zettamine.mpa.scm.dto.SurveyCompanyDto;
@@ -19,6 +20,7 @@ import com.zettamine.mpa.scm.entity.SurveyType;
 import com.zettamine.mpa.scm.exception.DuplicationException;
 import com.zettamine.mpa.scm.exception.ResourceNotFoundException;
 import com.zettamine.mpa.scm.mapper.SurveyCompanyMapper;
+import com.zettamine.mpa.scm.repository.ISurveyCompanySearchCriteriaRepository;
 import com.zettamine.mpa.scm.repository.SurveyCompanyRepository;
 import com.zettamine.mpa.scm.repository.SurveyServiceAreaRepository;
 import com.zettamine.mpa.scm.repository.SurveyServiceTypeRepository;
@@ -33,6 +35,8 @@ public class SurveyCompanyServiceImpl implements ISurveyCompanyService {
 	private SurveyCompanyRepository surveyCompanyRepo;
 	private SurveyServiceTypeRepository surveyTypeRepository;
 	private SurveyServiceAreaRepository serviceAreaRepository;
+	private ISurveyCompanySearchCriteriaRepository searchCriteriaRepository;
+	
 
 	@Override
 	public void createSurveyCompany(SurveyCompanyDto surveyCompanyDto) {
@@ -118,7 +122,7 @@ public class SurveyCompanyServiceImpl implements ISurveyCompanyService {
 		company.setSurveyTypes(surveyTypeList);
 		SurveyCompanyMapper.mapToSurveyCompany(surveyCompanyDto, company);
 		company.setSurveyCompanyId(surveyCompanyId);
-//		System.err.println(company);
+
 		surveyCompanyRepo.save(company);
 				
 	}
@@ -130,23 +134,16 @@ public class SurveyCompanyServiceImpl implements ISurveyCompanyService {
 		List<SurveyCompany> list = surveyCompanyRepo.findAll(Example.of(surveyCompany));
 		return list.stream()
 				            .map(company->SurveyCompanyMapper.mapToSurveyCompanyDto(company, new SurveyCompanyDto()))
-				            .collect(Collectors.toList());
+				            .toList();
 		
 	}
 	
-	@Override
+	//@Override
 	public List<SurveyCompanyDto> getCompaniesByServiceArea(SurveyCompanySearchCriteriaDto searchCriteriaDto) {
-		SurveyCompany surveyCompany= SurveyCompanyMapper.mapSearchCriteriaToSurveyCompany(searchCriteriaDto, new SurveyCompany());
-		ExampleMatcher matcher = ExampleMatcher.matching()
-                .withMatcher("companyName", match -> match.contains().ignoreCase()) // Configuring matcher only for 'name' property
-                .withIgnoreNullValues();
-        surveyCompany.setCity(null);
-        surveyCompany.setState(null);
-        surveyCompany.setZipcode(null);
-        
-        Example<SurveyCompany> example = Example.of(surveyCompany, matcher);
-        List<SurveyCompany> list = surveyCompanyRepo.findAll(example);
+		
+		List<SurveyCompany> list = surveyCompanyRepo.findByCompanyNameContaining(searchCriteriaDto.getName());
         Set<SurveyCompany> result = new HashSet<>();
+        
         
         SurveyServiceArea area = new SurveyServiceArea();
         area.setCity(searchCriteriaDto.getCity());
@@ -178,9 +175,10 @@ public class SurveyCompanyServiceImpl implements ISurveyCompanyService {
         			result.add(a.getSurveyCompany());
         		});
         }
+        
 		return result.stream()
 				.map(company->SurveyCompanyMapper.mapToSurveyCompanyDto(company, new SurveyCompanyDto()))
-				.collect(Collectors.toList());
+				.toList();
 		
 	}
 
@@ -188,8 +186,20 @@ public class SurveyCompanyServiceImpl implements ISurveyCompanyService {
 	public List<SurveyCompanyDto> getAllCompanies() {
 		return surveyCompanyRepo.findAll().stream()
 				                          .map(company->SurveyCompanyMapper.mapToSurveyCompanyDto(company, new SurveyCompanyDto()))
-				                          .collect(Collectors.toList());
+				                          .toList();
 	}
+	
+	
+	@Override
+    public List<SurveyCompanyDto> getAllCompaniesByServiceAreaCriteria(SurveyCompanySearchCriteriaDto searchCriteria) {
+       
+        if (searchCriteria.getName() == null && searchCriteria.getCity() == null && searchCriteria.getState() == null && searchCriteria.getZipcode() == null) {
+            return getAllCompanies();
+        }
+        
+       return searchCriteriaRepository.searchCompaniesByCriteria(searchCriteria);
+       
+    }
 
 
 }

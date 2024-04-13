@@ -1,6 +1,7 @@
 package com.zettamine.mpa.scm.repository;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,6 +15,8 @@ public interface SurveyCompanyRepository extends JpaRepository<SurveyCompany, Se
 	Optional<SurveyCompany> findByPhone(String mobileNumber);
 	
 	Optional<SurveyCompany> findByEmail(String email);
+
+	List<SurveyCompany> findByCompanyNameContaining(String name);
 
 
 }
