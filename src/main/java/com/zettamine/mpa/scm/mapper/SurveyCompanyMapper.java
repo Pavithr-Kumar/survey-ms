@@ -51,7 +51,7 @@ public class SurveyCompanyMapper {
 	}
 	
 	public static SurveyCompany mapSearchCriteriaToSurveyCompany(SurveyCompanySearchCriteriaDto searchCriteriaDto, SurveyCompany surveyCompany) {
-		surveyCompany.setSurveyCompanyId(searchCriteriaDto.getSurveyCompanyId());
+		
 		surveyCompany.setCompanyName(SurveyUtility.safeUpperCaseTrim(searchCriteriaDto.getName()));
 		surveyCompany.setState(SurveyUtility.safeUpperCaseTrim(searchCriteriaDto.getState()));
 		surveyCompany.setCity(SurveyUtility.safeUpperCaseTrim(searchCriteriaDto.getCity()));
