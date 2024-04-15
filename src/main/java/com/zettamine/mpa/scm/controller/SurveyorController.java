@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.zettamine.mpa.scm.constants.SurveyConstants;
 import com.zettamine.mpa.scm.dto.ResponseDto;
 import com.zettamine.mpa.scm.dto.SurveyServiceAreaDto;
 import com.zettamine.mpa.scm.dto.SurveyorDto;
@@ -35,9 +36,10 @@ public class SurveyorController {
      * @return ResponseEntity containing the HTTP status and response message.
      */
     @PostMapping("/create")
-    public ResponseEntity<ResponseDto> handlePost(@RequestBody SurveyorDto surveyorDto) {
+    public ResponseEntity<ResponseDto> createSurveyor(@RequestBody SurveyorDto surveyorDto) {
         surveyorService.saveSurveyor(surveyorDto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(new ResponseDto("201", "Surveyor added successfully"));
+        return ResponseEntity.status(HttpStatus.CREATED)
+        		             .body(new ResponseDto(SurveyConstants.STATUS_201, SurveyConstants.SURVEYOR_SAVE_MSG));
     }
 
     /**
@@ -48,7 +50,8 @@ public class SurveyorController {
      */
     @GetMapping("/fetch/{surveyorId}")
     public ResponseEntity<SurveyorDto> fetchSurveyor(@PathVariable Integer surveyorId) {
-        return ResponseEntity.status(HttpStatus.OK).body(surveyorService.fetchSurveyor(surveyorId));
+        return ResponseEntity.status(HttpStatus.OK)
+        		             .body(surveyorService.fetchSurveyor(surveyorId));
     }
 
     /**
@@ -61,19 +64,20 @@ public class SurveyorController {
     @PutMapping("/update/{surveyorId}")
     public ResponseEntity<ResponseDto> updateSurveyor(@PathVariable Integer surveyorId, @RequestBody SurveyorDto surveyorDto) {
         surveyorService.updateSurveyor(surveyorDto, surveyorId);
-        return ResponseEntity.status(HttpStatus.OK).body(new ResponseDto("200", "Surveyor details updated successfully"));
+        return ResponseEntity.status(HttpStatus.OK)
+        		             .body(new ResponseDto(SurveyConstants.STATUS_200, SurveyConstants.SURVEYOR_UPDATE_MSG));
     }
     
     
     
     @GetMapping("/fetch/company/{id}")
-    public ResponseEntity<List<SurveyorDto>> getAllServiceAreasByCompany(@PathVariable Integer id){
+    public ResponseEntity<List<SurveyorDto>> getAllSurveyorsByCompany(@PathVariable Integer id){
     	return ResponseEntity.status(HttpStatus.OK)
                 .body(surveyorService.getAllSurveyorsByCompanyId(id));
     }
     
     @GetMapping("/fetch-all")
-    public ResponseEntity<List<SurveyorDto>> getAllServiceAreas(){
+    public ResponseEntity<List<SurveyorDto>> getAllSurveyors(){
     	return ResponseEntity.status(HttpStatus.OK)
     			.body(surveyorService.getAllSurveyors());
     }

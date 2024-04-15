@@ -8,6 +8,10 @@ public class SurveyConstants {
 
 	public static final String STATUS_201 = "201";
 	public static final String MESSAGE_201 = "Resource created successfully";
+	
+	public static final String SURVEYOR_SAVE_MSG = "Surveyor created successfully";
+	
+	public static final String SURVEYOR_UPDATE_MSG = "Surveyor details updated successfully";
 
 	public static final String STATUS_200 = "200";
 	public static final String MESSAGE_200 = "Request processed successfully";

@@ -138,49 +138,49 @@ public class SurveyCompanyServiceImpl implements ISurveyCompanyService {
 		
 	}
 	
-	//@Override
-	public List<SurveyCompanyDto> getCompaniesByServiceArea(SurveyCompanySearchCriteriaDto searchCriteriaDto) {
-		
-		List<SurveyCompany> list = surveyCompanyRepo.findByCompanyNameContaining(searchCriteriaDto.getName());
-        Set<SurveyCompany> result = new HashSet<>();
-        
-        
-        SurveyServiceArea area = new SurveyServiceArea();
-        area.setCity(searchCriteriaDto.getCity());
-        area.setState(searchCriteriaDto.getState());
-        area.setZipcode(searchCriteriaDto.getZipcode());
-        List<SurveyServiceArea> areas = serviceAreaRepository.findAll(Example.of(area));
-        
-        if(searchCriteriaDto.getName()==null && searchCriteriaDto.getState() ==null && searchCriteriaDto.getCity()==null && searchCriteriaDto.getZipcode()==null) {
-        	surveyCompanyRepo.findAll().forEach(com->result.add(com));
-        }
-        
-        if(searchCriteriaDto.getName()!=null && searchCriteriaDto.getState() ==null && searchCriteriaDto.getCity()==null && searchCriteriaDto.getZipcode()==null) {
-        	list.forEach(com->result.add(com));
-        }
-        
-        
-        if(list.size()>0 )
-        list.forEach(company->{
-        	areas.forEach(a->{
-        		if(a.getSurveyCompany().getSurveyCompanyId().equals(company.getSurveyCompanyId())){
-        			result.add(company);
-        		}
-        	});
-        });
-        else
-        {
-        	areas.forEach(a->{
-        		
-        			result.add(a.getSurveyCompany());
-        		});
-        }
-        
-		return result.stream()
-				.map(company->SurveyCompanyMapper.mapToSurveyCompanyDto(company, new SurveyCompanyDto()))
-				.toList();
-		
-	}
+//	//@Override
+//	public List<SurveyCompanyDto> getCompaniesByServiceArea(SurveyCompanySearchCriteriaDto searchCriteriaDto) {
+//		
+//		List<SurveyCompany> list = surveyCompanyRepo.findByCompanyNameContaining(searchCriteriaDto.getName());
+//        Set<SurveyCompany> result = new HashSet<>();
+//        
+//        
+//        SurveyServiceArea area = new SurveyServiceArea();
+//        area.setCity(searchCriteriaDto.getCity());
+//        area.setState(searchCriteriaDto.getState());
+//        area.setZipcode(searchCriteriaDto.getZipcode());
+//        List<SurveyServiceArea> areas = serviceAreaRepository.findAll(Example.of(area));
+//        
+//        if(searchCriteriaDto.getName()==null && searchCriteriaDto.getState() ==null && searchCriteriaDto.getCity()==null && searchCriteriaDto.getZipcode()==null) {
+//        	surveyCompanyRepo.findAll().forEach(com->result.add(com));
+//        }
+//        
+//        if(searchCriteriaDto.getName()!=null && searchCriteriaDto.getState() ==null && searchCriteriaDto.getCity()==null && searchCriteriaDto.getZipcode()==null) {
+//        	list.forEach(com->result.add(com));
+//        }
+//        
+//        
+//        if(list.size()>0 )
+//        list.forEach(company->{
+//        	areas.forEach(a->{
+//        		if(a.getSurveyCompany().getSurveyCompanyId().equals(company.getSurveyCompanyId())){
+//        			result.add(company);
+//        		}
+//        	});
+//        });
+//        else
+//        {
+//        	areas.forEach(a->{
+//        		
+//        			result.add(a.getSurveyCompany());
+//        		});
+//        }
+//        
+//		return result.stream()
+//				.map(company->SurveyCompanyMapper.mapToSurveyCompanyDto(company, new SurveyCompanyDto()))
+//				.toList();
+//		
+//	}
 
 	@Override
 	public List<SurveyCompanyDto> getAllCompanies() {
