@@ -77,12 +77,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/v1/survey/surveyor/update/1",
+					"raw": "http://localhost:9030/api/v1/survey/surveyor/update/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "9030",
 					"path": [
 						"api",
 						"v1",
