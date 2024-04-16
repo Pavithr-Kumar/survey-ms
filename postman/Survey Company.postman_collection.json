@@ -1,0 +1,257 @@
+{
+	"info": {
+		"_postman_id": "02522ef9-1c2d-46f0-a3dd-76a2f468a88b",
+		"name": "Survey Company",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32726840"
+	},
+	"item": [
+		{
+			"name": "CREATE Survey Company",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \r\n    \"companyName\": \"LMN Surveying Inc.\",\r\n    \"address\": \"789 Oak St\",\r\n    \"city\": \"Villagetown\",\r\n    \"state\": \"Texas\",\r\n    \"zipcode\": \"77001\",\r\n    \"country\": \"USA\",\r\n    \"phone\": \"111-222-4478\",\r\n    \"email\": \"info@pjskmnrsurveying.com\",\r\n    \"website\": \"https://www.abcsurveying.com\",\r\n    \"notes\": \"Specializing in land surveying services since 1990.\",\r\n    \"providesTriangulationService\": true\r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9030/api/v1/survey/company/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9030",
+					"path": [
+						"api",
+						"v1",
+						"survey",
+						"company",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "FETCH Survey Company",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9030/api/v1/survey/company/fetch/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9030",
+					"path": [
+						"api",
+						"v1",
+						"survey",
+						"company",
+						"fetch",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SEARCH Survey Company by service area",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    // \"surveyCompanyId\":1\r\n    //\"name\":\"\",\r\n     \"state\":\"dallas\"\r\n     //\"city\":\"HOUSTON\"\r\n    // \"zipcode\":\"77001\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9030/api/v1/survey/company/search-by-serv-area",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9030",
+					"path": [
+						"api",
+						"v1",
+						"survey",
+						"company",
+						"search-by-serv-area"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE Survey Company",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \r\n    \"companyName\": \"XYZ Surveying Inc.\",\r\n    \"address\": \"789 Oak St\",\r\n    \"city\": \"Villagetown\",\r\n    \"state\": \"Texas\",\r\n    \"zipcode\": \"77001\",\r\n    \"country\": \"USA\",\r\n    \"phone\": \"111-222-3334\",\r\n    \"email\": \"info@abcsurveying.com\",\r\n    \"website\": \"https://www.abcsurveying.com\",\r\n    \"notes\": \"Specializing in land surveying services since 1990.\",\r\n    \"providesTriangulationService\": true\r\n    \r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/survey/company/update/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"survey",
+						"company",
+						"update",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Company with Survey Types",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \r\n    \"companyName\": \"GHJ Surveying Inc.\",\r\n    \"address\": \"789 Oak St\",\r\n    \"city\": \"Villagetown\",\r\n    \"state\": \"Texas\",\r\n    \"zipcode\": \"77001\",\r\n    \"country\": \"USA\",\r\n    \"phone\": \"111-222-4440\",\r\n    \"email\": \"info@GHJurveying.com\",\r\n    \"website\": \"https://www.abcsurveying.com\",\r\n    \"notes\": \"Specializing in land surveying services since 1990.\",\r\n    \"providesTriangulationService\": true,\r\n    \"surveyTypeNamesList\":[\"Boundary Survey\"]\r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/survey/company/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"survey",
+						"company",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE Company with Survey Types",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\r\n{\r\n    \r\n    \"companyName\": \"XYZ Surveying Inc.\",\r\n    \"address\": \"789 Oak St\",\r\n    \"city\": \"Villagetown\",\r\n    \"state\": \"Texas\",\r\n    \"zipcode\": \"77001\",\r\n    \"country\": \"USA\",\r\n    \"phone\": \"111-222-3334\",\r\n    \"email\": \"info@abcsurveying.com\",\r\n    \"website\": \"https://www.abcsurveying.com\",\r\n    \"notes\": \"Specializing in land surveying services since 1990.\",\r\n    \"providesTriangulationService\": true,\r\n    \"surveyTypeNamesList\":[\"Boundary Survey\",\"ALTA Survey\"]\r\n    \r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9030/api/v1/survey/company/update/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9030",
+					"path": [
+						"api",
+						"v1",
+						"survey",
+						"company",
+						"update",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SEARCH by Survey Company Location",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    // \"surveyCompanyId\":1\r\n    \"name\":\"XYZ\",\r\n     \"state\":\"TEXAS\",\r\n     \"city\":\"HOUSTON\",\r\n     \"zipcode\":\"77001\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/survey/company/search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"survey",
+						"company",
+						"search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "FETCH ALL",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/survey/company/fetch-all",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"survey",
+						"company",
+						"fetch-all"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

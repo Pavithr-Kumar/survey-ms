@@ -1,0 +1,147 @@
+{
+	"info": {
+		"_postman_id": "9d95ca30-04b6-4510-b71f-c9b2a176403f",
+		"name": "Survey Service Area",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32726840"
+	},
+	"item": [
+		{
+			"name": "CREATE Service Area",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\r\n    \"surveyCompanyId\": 1,\r\n    \"surveyServiceAreas\": [\r\n         {\r\n    \r\n        \"county\": \"LAS VEGAS\",\r\n        \"city\": \"HOUSTON\",\r\n        \"state\": \"Dallas\",\r\n        \"zipcode\": \"77001\"\r\n       \r\n    }\r\n   \r\n    ]\r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9030/api/v1/survey/service-area/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9030",
+					"path": [
+						"api",
+						"v1",
+						"survey",
+						"service-area",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE Survey Service Area",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"serviceAreaId\": 2,\r\n        \"county\": \"LAS VEGAS\",\r\n        \"city\": \"HOUSTON\",\r\n        \"state\": \"TEXAS\",\r\n        \"zipcode\": \"77001\",\r\n        \"surveyCompanyId\": 1\r\n        // \"surveyCompanyName\": \"XYZ SURVEYING INC.\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/survey/service-area/update/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"survey",
+						"service-area",
+						"update",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "FETCH Survey Service Area",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9030/api/v1/survey/service-area/fetch/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9030",
+					"path": [
+						"api",
+						"v1",
+						"survey",
+						"service-area",
+						"fetch",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "FETCH by Survey Company",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/survey/service-area/fetch/company/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"survey",
+						"service-area",
+						"fetch",
+						"company",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "FETCH ALL",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/survey/service-area/fetch-all",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"survey",
+						"service-area",
+						"fetch-all"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

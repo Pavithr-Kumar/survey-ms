@@ -1,0 +1,147 @@
+{
+	"info": {
+		"_postman_id": "8fe0aff3-0705-446d-b774-fce5bd6fe471",
+		"name": "Surveyor",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32726840"
+	},
+	"item": [
+		{
+			"name": "CREATE  Surveyor",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"surveyorLicenceId\" : \"S489365837\",\r\n  \"firstName\":\"Michael\",\r\n  \"lastName\":\"Doe\",\r\n  \"email\":\"michael.oe@gmail.com\",\r\n  \"phone\":\"555-987-655\",\r\n  \"surveyCompanyId\":\"1\",\r\n  \"geodeticControl\":true,\r\n  \"historicPreservation\":true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9030/api/v1/survey/surveyor/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9030",
+					"path": [
+						"api",
+						"v1",
+						"survey",
+						"surveyor",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "FETCH Surveyor",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9030/api/v1/survey/surveyor/fetch/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9030",
+					"path": [
+						"api",
+						"v1",
+						"survey",
+						"surveyor",
+						"fetch",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE Surveyor",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"surveyorLicenceId\" : \"S489365837\",\r\n  \"firstName\":\"Ravi Kumar\",\r\n  \"lastName\":\"Varma\",\r\n  \"email\":\"michael.oe@gmail.com\",\r\n  \"phone\":\"555-987-654\",\r\n  \"surveyCompanyId\":\"1\",\r\n  \"geodeticControl\":true,\r\n  \"historicPreservation\":true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/survey/surveyor/update/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"survey",
+						"surveyor",
+						"update",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "FETCH Surveyors by Company",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9030/api/v1/survey/surveyor/fetch/company/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9030",
+					"path": [
+						"api",
+						"v1",
+						"survey",
+						"surveyor",
+						"fetch",
+						"company",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "FETCH ALL",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9030/api/v1/survey/surveyor/fetch-all",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9030",
+					"path": [
+						"api",
+						"v1",
+						"survey",
+						"surveyor",
+						"fetch-all"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

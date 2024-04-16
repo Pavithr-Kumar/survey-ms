@@ -1,0 +1,122 @@
+{
+	"info": {
+		"_postman_id": "df5cf599-f601-4a68-bb89-9066b5176544",
+		"name": "Survey Type",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32726840"
+	},
+	"item": [
+		{
+			"name": "CREATE Survey Type",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"surveyTypeName\" : \"ALTA Survey\",\r\n    \"description\" : \"American Land Title Association survey, used for various real estate transactions.\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9030/api/v1/survey/survey-type/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9030",
+					"path": [
+						"api",
+						"v1",
+						"survey",
+						"survey-type",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE Survey Type",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"surveyTypeName\" : \"Boundary Survey\",\r\n    \"description\" : \"Determines the legal boundaries of a property.\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/survey/survey-type/update/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"survey",
+						"survey-type",
+						"update",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "FETCH Survey Type By Company",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9030/api/v1/survey/survey-type/fetch/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9030",
+					"path": [
+						"api",
+						"v1",
+						"survey",
+						"survey-type",
+						"fetch",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "FETCH ALL",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/survey/survey-type/fetch-all",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"survey",
+						"survey-type",
+						"fetch-all"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
