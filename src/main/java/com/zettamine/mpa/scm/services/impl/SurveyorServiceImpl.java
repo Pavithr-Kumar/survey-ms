@@ -81,6 +81,8 @@ public class SurveyorServiceImpl implements ISurveyorService {
      */
     @Override
     public void updateSurveyor(SurveyorDto surveyorDto, Integer id) {
+	    if(surveyorRepository.findById(id).isEmpty())
+    		throw new ResourceNotFoundException("No Surveyors found with Id : " + id);
         if (surveyCompanyRepository.findById(surveyorDto.getSurveyCompanyId()).isEmpty()) {
             throw new ResourceNotFoundException("No Companies found with Id : " + surveyorDto.getSurveyCompanyId());
         }
